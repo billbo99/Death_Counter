@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 2020-09-10
+  Bugfixes:
+    - Deal better with mods being removed from the game and the icons no longer exist.
+---------------------------------------------------------------------------------------------------
+Version: 0.0.2
+Date: 20-Aug-2020
+  Changes:
+    - Removed the event subscription to "on_player_removed",  if a game uses `game.remove_offline_players()` to clear dead accounts I still want this mod to track the names, in case they come back.
+---------------------------------------------------------------------------------------------------
+Version: 0.0.1
+Date: 17-Aug-2020
+  Features:
+    - Tracks the ways you (and your friends) have died
+  Changes:
+  Bugfixes:
+  Info:
