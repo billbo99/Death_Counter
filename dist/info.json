@@ -1,11 +1,11 @@
 {
     "name": "Death_Counter",
-    "version": "0.0.3",
+    "version": "1.0.0",
     "title": "Death Counter",
     "author": "billbo99",
     "contact": "",
     "homepage": "https://mods.factorio.com/mod/Death_Counter",
-    "factorio_version": "1.0",
+    "factorio_version": "1.1",
     "dependencies": [
         "base"
     ],
