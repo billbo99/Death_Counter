@@ -81,5 +81,32 @@ script.on_event(
         else
             global.causes[cause] = global.causes[cause] + 1
         end
+
+        if settings.global["DeathCounter_Summary"] and settings.global["DeathCounter_Summary"].value then
+            local _summary = {}
+            for _player, data in pairs(global.players) do
+                local _total = 0
+                if data.DeathCount then
+                    for _cause, _count in pairs(data.DeathCount) do
+                        _total = _total + _count
+                    end
+                end
+                _summary[_player] = _total
+            end
+
+            local _keys = {}
+            for k,_ in pairs(_summary) do table.insert(_keys,k) end
+            table.sort(_keys)
+
+            local _target = e.player_index  -- player location
+            if game.is_multiplayer() then
+                _target = 0  -- server location
+            end
+
+            game.write_file("DeathCounter_kill_summary.csv", "player,count\n" , false, _target)
+            for _,k in ipairs(_keys) do
+                game.write_file("DeathCounter_kill_summary.csv", k .. "," .. _summary[k] .. "\n", true, _target)
+            end
+        end
     end
 )
