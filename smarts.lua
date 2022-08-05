@@ -1,5 +1,5 @@
 local player_data = require("scripts.player-data")
-local Gui = require("scripts.Gui")
+local Gui = require("scripts.gui")
 
 ---@class Smarts
 local Smarts = {}
