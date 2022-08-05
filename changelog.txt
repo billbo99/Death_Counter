@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.3
+Date: 2022-08-05
+  Changes:
+    - Added support for Space Exploration respawn event.
+      - Until my pull request is merged any deaths will show up as unknown as the custom event from SE currently does not pass the Entity that caused the death.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 2022-06-17
+  Changes:
+    - Added setting to write a log file per player with their death count
+---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 2022-06-13
   Changes:
