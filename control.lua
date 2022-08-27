@@ -1,6 +1,7 @@
 local Smarts = require("smarts")
 
 script.on_init(Smarts.on_init)
+script.on_load(Smarts.on_load)
 script.on_configuration_changed(Smarts.on_configuration_changed)
 script.on_event(defines.events.on_player_created, Smarts.on_player_created)
 script.on_event(defines.events.on_player_joined_game, Smarts.on_player_joined_game)

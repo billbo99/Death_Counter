@@ -4,22 +4,29 @@ local Gui = require("scripts.gui")
 ---@class Smarts
 local Smarts = {}
 
-function Smarts.init_glolbal()
-    global.players = global.players or {}
-    global.causes = global.causes or {}
-
-    if game.active_mods["space-exploration"] then
+function Smarts.space_exploration_compat()
+    if remote.interfaces["space-exploration"] then
         local respawned_event = remote.call("space-exploration", "get_on_player_respawned_event")
         script.on_event(respawned_event, Smarts.on_player_died)
     end
+end
+
+function Smarts.init_glolbal()
+    global.players = global.players or {}
+    global.causes = global.causes or {}
 end
 
 function Smarts.on_configuration_changed()
     Smarts.init_glolbal()
 end
 
+function Smarts.on_load()
+    Smarts.space_exploration_compat()
+end
+
 function Smarts.on_init()
     Smarts.init_glolbal()
+    Smarts.space_exploration_compat()
 
     for i, _ in pairs(game.players) do
         player_data.init(i)
