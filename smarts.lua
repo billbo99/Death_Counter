@@ -54,6 +54,7 @@ function Smarts.on_gui_click(e)
 end
 
 function Smarts.on_player_died(e)
+    player_data.init(e.player_index)
     local PlayerName = game.get_player(e.player_index).name
     local player_table = global.players[PlayerName]
 
@@ -105,6 +106,11 @@ function Smarts.on_player_died(e)
         local _target = e.player_index -- player location
         if game.is_multiplayer() then
             _target = 0 -- server location
+        end
+
+
+        if settings.global["DeathCounter_Summary"].value and settings.global["DeathCounter_Summary"].value then
+            game.write_file("DeathCounter_kill_summary.json", game.table_to_json(global.players), false, _target)
         end
 
         if settings.global["DeathCounter_Summary"] and settings.global["DeathCounter_Summary"].value then
