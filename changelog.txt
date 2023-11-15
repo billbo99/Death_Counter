@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.8
+Date: 2023-11-15
+  Bugfixes:
+    - Added ability to close gui using E or ESC
+---------------------------------------------------------------------------------------------------
 Version: 1.0.7
 Date: 2022-09-16
   Bugfixes:
@@ -12,8 +17,7 @@ Date: 2022-08-30
 Version: 1.0.4
 Date: 2022-08-05
   Bugfixes:
-    -  __Death_Counter__/smarts.lua:2: module scripts.Gui not found;  no such file Death_Counter/scripts/Gui.lua no such file Death_Counter/scripts/Gui.lua no such file core/lualib/scripts/Gui.lua
-      - Not sure how this happened, but something changed gui to Gui.
+    - smarts.lua:2: module scripts.Gui not found;  no such file Death_Counter/scripts/Gui.lua no such file Death_Counter/scripts/Gui.lua no such file core/lualib/scripts/Gui.lua
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.3
 Date: 2022-08-05
