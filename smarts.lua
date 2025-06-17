@@ -105,23 +105,21 @@ function Smarts.on_player_died(e)
 
         local _target = e.player_index -- player location
         if game.is_multiplayer() then
-            _target = 0 -- server location
+            _target = 0                -- server location
         end
 
 
         if settings.global["DeathCounter_Summary"].value and settings.global["DeathCounter_Summary"].value then
-            game.write_file("DeathCounter_kill_summary.json", game.table_to_json(storage.players), false, _target)
+            helpers.write_file("DeathCounter_kill_summary.json", helpers.table_to_json(storage.players), false, _target)
+            helpers.write_file("DeathCounter_kill_summary.csv", "player,count\n", false, _target)
         end
 
-        if settings.global["DeathCounter_Summary"] and settings.global["DeathCounter_Summary"].value then
-            game.write_file("DeathCounter_kill_summary.csv", "player,count\n", false, _target)
-        end
         for _, k in ipairs(_keys) do
             if settings.global["DeathCounter_Summary"] and settings.global["DeathCounter_Summary"].value then
-                game.write_file("DeathCounter_kill_summary.csv", k .. "," .. _summary[k] .. "\n", true, _target)
+                helpers.write_file("DeathCounter_kill_summary.csv", k .. "," .. _summary[k] .. "\n", true, _target)
             end
             if settings.global["DeathCounter_PerPlayer"] and settings.global["DeathCounter_PerPlayer"].value then
-                game.write_file(k .. ".csv", _summary[k] .. "\n", false, _target)
+                helpers.write_file(k .. ".csv", _summary[k] .. "\n", false, _target)
             end
         end
     end
