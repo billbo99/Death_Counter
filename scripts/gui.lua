@@ -44,17 +44,17 @@ function Gui.CreateMainGui(player)
         player.opened = nil
     end
 
-    if global.causes and Utils.TableSize(global.causes) > 0 then
+    if storage.causes and Utils.TableSize(storage.causes) > 0 then
         local DeathCounterMain = player.gui.left.add({ type = "frame", name = "DeathCounterMain", direction = "vertical" })
         player.opened = DeathCounterMain
         DeathCounterMain.style.minimal_height = 10
         DeathCounterMain.style.minimal_width = 10
 
-        DeathCounterMain.add({ type = "label", caption = "Death Counter", style = "heading_1_label" })
+        DeathCounterMain.add({ type = "label", caption = "Death Counter", style = "frame_title" })
 
-        local headers = Utils.sortedKeys(global.causes)
+        local headers = Utils.sortedKeys(storage.causes)
         local column_count = 2 + #headers
-        local f = DeathCounterMain.add({ type = "table", style = "mod_info_table", column_count = column_count })
+        local f = DeathCounterMain.add({ type = "table", style = "bordered_table", column_count = column_count })
 
         f.add({ type = "label", caption = "Player", style = "bold_label" })
         f.add({ type = "label", caption = "Total", style = "bold_label" })
@@ -67,7 +67,7 @@ function Gui.CreateMainGui(player)
                 local killer = Utils.split(header, "/")[2]
                 f.add({ type = "sprite", sprite = "entity.character", tooltip = killer })
             else
-                if player.gui.is_valid_sprite_path(string.format("entity.%s", header)) then
+                if helpers.is_valid_sprite_path(string.format("entity.%s", header)) then
                     f.add({ type = "sprite", sprite = string.format("entity.%s", header), tooltip = { "entity-name." .. header } })
                 else
                     f.add({ type = "sprite", sprite = "utility.questionmark", tooltip = header })
@@ -76,12 +76,12 @@ function Gui.CreateMainGui(player)
         end
 
         local death_counts = {}
-        for player_name, _ in pairs(global.players) do
+        for player_name, _ in pairs(storage.players) do
             if not death_counts[player_name] then
                 death_counts[player_name] = 0
             end
-            for cause, _ in pairs(global.players[player_name].DeathCount) do
-                death_counts[player_name] = death_counts[player_name] + global.players[player_name].DeathCount[cause]
+            for cause, _ in pairs(storage.players[player_name].DeathCount) do
+                death_counts[player_name] = death_counts[player_name] + storage.players[player_name].DeathCount[cause]
             end
         end
 
@@ -90,8 +90,8 @@ function Gui.CreateMainGui(player)
             f.add({ type = "label", caption = player_name })
             f.add({ type = "label", caption = death_counts[player_name] })
             for _, header in pairs(headers) do
-                if global.players[player_name]["DeathCount"][header] then
-                    f.add({ type = "label", caption = global.players[player_name]["DeathCount"][header] })
+                if storage.players[player_name]["DeathCount"][header] then
+                    f.add({ type = "label", caption = storage.players[player_name]["DeathCount"][header] })
                 else
                     f.add({ type = "label", caption = "" })
                 end

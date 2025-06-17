@@ -12,8 +12,8 @@ function Smarts.space_exploration_compat()
 end
 
 function Smarts.init_glolbal()
-    global.players = global.players or {}
-    global.causes = global.causes or {}
+    storage.players = storage.players or {}
+    storage.causes = storage.causes or {}
 end
 
 function Smarts.on_configuration_changed()
@@ -56,7 +56,7 @@ end
 function Smarts.on_player_died(e)
     player_data.init(e.player_index)
     local PlayerName = game.get_player(e.player_index).name
-    local player_table = global.players[PlayerName]
+    local player_table = storage.players[PlayerName]
 
     Gui.DestroyGui(game.players[e.player_index])
 
@@ -81,15 +81,15 @@ function Smarts.on_player_died(e)
         player_table.DeathCount[cause] = player_table.DeathCount[cause] + 1
     end
 
-    if not global.causes[cause] then
-        global.causes[cause] = 1
+    if not storage.causes[cause] then
+        storage.causes[cause] = 1
     else
-        global.causes[cause] = global.causes[cause] + 1
+        storage.causes[cause] = storage.causes[cause] + 1
     end
 
     if (settings.global["DeathCounter_Summary"] and settings.global["DeathCounter_Summary"].value) or (settings.global["DeathCounter_PerPlayer"] and settings.global["DeathCounter_PerPlayer"].value) then
         local _summary = {}
-        for _player, data in pairs(global.players) do
+        for _player, data in pairs(storage.players) do
             local _total = 0
             if data.DeathCount then
                 for _cause, _count in pairs(data.DeathCount) do
@@ -110,7 +110,7 @@ function Smarts.on_player_died(e)
 
 
         if settings.global["DeathCounter_Summary"].value and settings.global["DeathCounter_Summary"].value then
-            game.write_file("DeathCounter_kill_summary.json", game.table_to_json(global.players), false, _target)
+            game.write_file("DeathCounter_kill_summary.json", game.table_to_json(storage.players), false, _target)
         end
 
         if settings.global["DeathCounter_Summary"] and settings.global["DeathCounter_Summary"].value then
